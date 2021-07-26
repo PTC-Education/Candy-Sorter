@@ -60,6 +60,11 @@ def MotorTest():
     kit.servo[feederServo].angle = 90
     kit.servo[rampServo].angle = 90
 
+def SensorTest():
+    RGB = sensor.color_rgb_bytes
+    L = sensor.lux
+    T = sensor.color_temperature
+    print(RGB,L,T)
 
 def GetPrediction(RGB,L,T):
     twService = "ColorPredictionService"
