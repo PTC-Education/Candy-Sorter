@@ -19,6 +19,21 @@ appKey = '156f0901-bed5-41fb-a2bd-34b5580ecf38'
 feederServo = 6
 rampServo = 7
 
+def setServoNumbers():
+    global feederServo
+    feederServo = int(input("Enter pin number of feeder servo:"))
+    global rampServo
+    rampServo = int(input("Enter pin number of ramp servo:"))
+
+def setThingWorxCreds():
+    global baseURL
+    global appKey
+    baseURL = input("Enter your ThingWorx URL including the name of your thing (i.e. 'https://pp-123abc.portal.ptc.io/Thingworx/Things/CandySorter/'):")
+    appKey = input("Enter your ThingWorx appKey:")
+
+def testGlob():
+    print(feederServo,rampServo)
+
 ## Set Ramp Motor Positions
 def MotorColorPos(argument):
     switcher = {
