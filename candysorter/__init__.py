@@ -12,12 +12,19 @@ i2c = board.I2C()
 sensor = adafruit_tcs34725.TCS34725(i2c)
 
 ## Set ThingWorx Parameters
-baseURL = "https://pp-2101111403aw.portal.ptc.io/Thingworx/Things/CandySorter/Services/"
+baseURL = "https://pp-2101111403aw.portal.ptc.io/Thingworx/Things/CandySorter/"
 appKey = '156f0901-bed5-41fb-a2bd-34b5580ecf38'
 
 ## Set Motor Numbers
 feederServo = 6
 rampServo = 7
+
+## Set Ramp Servo Positions
+orangePos = 120
+redPos = 98
+yellowPos = 75
+greenPos = 52
+purplePos = 30
 
 def setServoNumbers():
     global feederServo
@@ -31,17 +38,29 @@ def setThingWorxCreds():
     baseURL = input("Enter your ThingWorx URL including the name of your thing (i.e. 'https://pp-123abc.portal.ptc.io/Thingworx/Things/CandySorter/'):")
     appKey = input("Enter your ThingWorx appKey:")
 
+def setColorPos():
+    global orangePos
+    global redPos
+    global yellowPos
+    global greenPos
+    global purplePos
+    orangePos = int(input("Input new orange bin angle: (current position is "+str(orangePos)+"):"))
+    redPos = int(input("Input new red bin angle: (current position is "+str(redPos)+"):"))
+    yellowPos = int(input("Input new yellow bin angle: (current position is "+str(yellowPos)+"):"))
+    greenPos = int(input("Input new green bin angle: (current position is "+str(greenPos)+"):"))
+    purplePos = int(input("Input new purple bin angle: (current position is "+str(purplePos)+"):"))
+
 def testGlob():
-    print(feederServo,rampServo)
+    print(orangePos,redPos)
 
 ## Set Ramp Motor Positions
 def MotorColorPos(argument):
     switcher = {
-        'orange': 120,
-        'red': 98,
-        'yellow': 75,
-        'green': 52,
-        'purple': 30
+        'orange': orangePos,
+        'red': redPos,
+        'yellow': yellowPos,
+        'green': greenPos,
+        'purple': purplePos
     }
     return switcher.get(argument, "nothing")
 
@@ -82,7 +101,7 @@ def SensorTest():
     print(RGB,L,T)
 
 def GetPrediction(RGB,L,T):
-    twService = "ColorPredictionService"
+    twService = "Services/ColorPredictionService"
     payload={'Rin':RGB[0],
              'Gin':RGB[1],
              'Bin':RGB[2],
@@ -102,7 +121,7 @@ def GetPrediction(RGB,L,T):
     return result
 
 def LogData(RGB,L,T,color):
-    twService = "AddCandyData"
+    twService = "Services/AddCandyData"
     appKey = '156f0901-bed5-41fb-a2bd-34b5580ecf38'
     payload={'inR':RGB[0],
              'inG':RGB[1],
