@@ -175,7 +175,7 @@ def autoMain():
             time.sleep(0.5)
 
 # Training program
-def trainingMain():
+def trainingMain(duplicationNum):
     while(True):
         kit.servo[feederServo].angle = hopperPos # hopper position
         time.sleep(0.5)
@@ -187,7 +187,7 @@ def trainingMain():
         print('Lux: {0}'.format(sensor.lux))
         RGB = sensor.color_rgb_bytes
         L = sensor.lux
-        T = sensor.color_temperature    
+        T = sensor.color_temperature
 
         color = input("Enter candy color:")
 
@@ -196,7 +196,8 @@ def trainingMain():
             LogData(RGB,L,T,color)
             Shake()
         else:
-            LogData(RGB,L,T,color)
+            for i in range(duplicationNum):
+                LogData(sensor.color_rgb_bytes,sensor.lux,sensor.color_temperature,color)
             kit.servo[rampServo].angle = MotorColorPos(color)
             time.sleep(0.5)
             kit.servo[feederServo].angle = 15 # Ramp position
