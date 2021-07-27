@@ -26,6 +26,11 @@ yellowPos = 75
 greenPos = 52
 purplePos = 30
 
+## Set Feeder Disk Motor Positions
+hopperPos = 160
+sensorPos = 90
+rampPos = 20
+
 def setServoNumbers():
     global feederServo
     feederServo = int(input("Enter pin number of feeder servo:"))
@@ -50,6 +55,14 @@ def setColorPos():
     greenPos = int(input("Input new green bin angle: (current position is "+str(greenPos)+"):"))
     purplePos = int(input("Input new purple bin angle: (current position is "+str(purplePos)+"):"))
 
+def setFeederPos():
+    global hopperPos
+    global sensorPos
+    global rampPos
+    hopperPos = int(input("Input new hopper position angle: (current position is "+str(hopperPos)+"):"))
+    sensorPos = int(input("Input new sensor position angle: (current position is "+str(sensorPos)+"):"))
+    rampPos = int(input("Input new ramp position angle: (current position is "+str(rampPos)+"):"))
+
 def testGlob():
     print(orangePos,redPos)
 
@@ -64,17 +77,26 @@ def MotorColorPos(argument):
     }
     return switcher.get(argument, "nothing")
 
-## Set Feeder Disk Motor Positions
-hopperPos = 160
-sensorPos = 90
-rampPos = 20
-
 def FeederServoTest():
+    print('moving feeder servo')
     kit.servo[feederServo].angle = hopperPos
     time.sleep(1)
     kit.servo[feederServo].angle = sensorPos
     time.sleep(1)
     kit.servo[feederServo].angle = rampPos
+    time.sleep(1)
+
+def RampServoTest():
+    print('moving ramp servo')
+    kit.servo[rampServo].angle = MotorColorPos('orange')
+    time.sleep(1)
+    kit.servo[rampServo].angle = MotorColorPos('red')
+    time.sleep(1)
+    kit.servo[rampServo].angle = MotorColorPos('yellow')
+    time.sleep(1)
+    kit.servo[rampServo].angle = MotorColorPos('green')
+    time.sleep(1)
+    kit.servo[rampServo].angle = MotorColorPos('purple')
     time.sleep(1)
 
 def MotorTest():
