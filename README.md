@@ -15,6 +15,7 @@
 ```
 sudo pip3 install adafruit-circuitpython-servokit
 sudo pip3 install adafruit-circuitpython-tcs34725
+sudo pip3 install pandas
 ```
 
 ### Build Candy Sorting Machine (using AR work instructions)
