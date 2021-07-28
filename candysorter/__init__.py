@@ -32,6 +32,7 @@ hopperPos = 160
 sensorPos = 90
 rampPos = 20
 
+##
 ## Define Settings Functions
 ##
 ##
@@ -67,9 +68,6 @@ def setFeederPos():
     sensorPos = int(input("Input new sensor position angle: (current position is "+str(sensorPos)+"):"))
     rampPos = int(input("Input new ramp position angle: (current position is "+str(rampPos)+"):"))
 
-def testGlob():
-    print(orangePos,redPos)
-
 ## Set Ramp Motor Positions
 def MotorColorPos(argument):
     switcher = {
@@ -84,7 +82,7 @@ def MotorColorPos(argument):
 ## Define Testing Functions
 ##
 ##
-def FeederServoTest():
+def feederServoTest():
     print('moving feeder servo')
     kit.servo[feederServo].angle = hopperPos
     time.sleep(1)
@@ -93,7 +91,7 @@ def FeederServoTest():
     kit.servo[feederServo].angle = rampPos
     time.sleep(1)
 
-def RampServoTest():
+def rampServoTest():
     print('moving ramp servo')
     kit.servo[rampServo].angle = MotorColorPos('orange')
     time.sleep(1)
@@ -106,7 +104,7 @@ def RampServoTest():
     kit.servo[rampServo].angle = MotorColorPos('purple')
     time.sleep(1)
 
-def MotorTest():
+def fullServoTest():
     print('moving ramp servo')
     kit.servo[rampServo].angle = MotorColorPos('orange')
     time.sleep(1)
@@ -119,19 +117,20 @@ def MotorTest():
     kit.servo[rampServo].angle = MotorColorPos('purple')
     time.sleep(1)
     print('moving feeder servo')
-    FeederServoTest()
+    feederServoTest()
     kit.servo[feederServo].angle = 90
     kit.servo[rampServo].angle = 90
 
-def SensorTest():
+def sensorTest():
     RGB = sensor.color_rgb_bytes
     L = sensor.lux
     T = sensor.color_temperature
     print(RGB,L,T)
 
+##
 ## Define ThingWorx Functions
 ##
-##
+## Helper functions
 def GetPrediction(RGB,L,T):
     twService = "Services/ColorPredictionService"
     payload={'Rin':RGB[0],
@@ -358,7 +357,8 @@ def callTrainModelService():
     thingworx_response = requests.post(baseURL+twService, headers=headers, json=payload, verify=False)
     return thingworx_response
 
-def TrainMode():
+## Main TW Functions
+def trainMode():
     response = callTrainModelService() # execute the the service call
     if response.status_code == 200: # check the response 
         result = json.loads(response.text)
@@ -396,6 +396,7 @@ def getModelStatus():
         print("Request failed with error code: " + str(response))
         print("Thingworx error code: " + str(response.text))
 
+##
 ## Define Main Functions
 ##
 ##
@@ -407,7 +408,7 @@ def Shake():
         time.sleep(0.05)
   
 # Automatic sorting program
-def autoMain():
+def mainAutoSort():
     while(True):
         kit.servo[feederServo].angle = hopperPos # candy hopper position
         time.sleep(0.5)
@@ -425,17 +426,15 @@ def autoMain():
         
         if MotorColorPos(color)=="nothing":
             print("no skittle - time to shake!")
-            LogData(RGB,L,T,color)
             Shake()
         else:
-            LogData(RGB,L,T,color)
             kit.servo[rampServo].angle = MotorColorPos(color)
             time.sleep(0.5)
             kit.servo[feederServo].angle = rampPos # Ramp position
             time.sleep(0.5)
 
 # Training program
-def trainingMain(duplicationNum):
+def mainTraining(duplicationNum):
     while(True):
         kit.servo[feederServo].angle = hopperPos # hopper position
         time.sleep(0.5)
@@ -453,7 +452,7 @@ def trainingMain(duplicationNum):
 
         if MotorColorPos(color)=="nothing":
             print("no skittle - time to shake!")
-            LogData(sensor.color_rgb_bytes,sensor.lux,sensor.color_temperature,color)
+            LogData(sensor.color_rgb_bytes,sensor.lux,sensor.color_temperature,"none")
             Shake()
         else:
             for i in range(duplicationNum):
