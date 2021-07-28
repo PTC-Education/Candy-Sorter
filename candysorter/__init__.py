@@ -209,7 +209,7 @@ def GetData():
     return transformed_data
 
 def callTrainModelService():
-    transformed_data = GetData()
+    data = GetData()
     twService = "Services/TrainAnalyticsModel"
     goal = input("Which of the following fields "+str(data.columns)+" is the goal you'd like to predict?")
     payload = {"goal": goal, # use the input from the user as goal 
@@ -218,7 +218,7 @@ def callTrainModelService():
                         "fieldDefinitions": { # add a empty dictionary, data shape information gets filled in later
                         }
                     },
-                "rows": transformed_data["rows"]}, # each row contains the values of one row of the spreadsheet that was read in before
+                "rows": data["rows"]}, # each row contains the values of one row of the spreadsheet that was read in before
                 "metadataInput": { # Thingworx Analytics need additional information of the data supplied for training
                     "dataShape": { # Same reason as above, used to define the structure of the Thingworx Infotable
                         "fieldDefinitions": { # following fields are the Infotable structure for AnalyticsDatasetMetadataFlattened Infotable
@@ -308,42 +308,42 @@ def callTrainModelService():
 
     # fill the datashape definition of the training data read from the spreadsheet
     for col in range(len(data.columns)): # iterate over columns
-    baseType = input("Input the base type for the field named "+data.columns[col]+" (i.e. INTEGER, NUMBER, STRING, etc.):")
-    opType = input("Input the op type for the field named "+data.columns[col]+" (i.e. CONTINUOUS, CATEGORICAL, etc.):")
-    datashape_dict["fieldDefinitions"][data.columns[col]]= { #add new key to field definitions
-        "name" : data.columns[col], # name is the same value as the key 
-        "aspects" : {
-            "isPrimaryKey": "false"
-        },
-        "description": "",
-        "baseType": baseType # only numbers are used for this script, Thingworx base types that can be used with Analytics are supported, see link down below
-    }
-    if opType == "CATEGORICAL":
-        valueList = input("Input the various values for the categorical field as array (i.e. ['red','green','blue']):")
-        metadata_list.append({ # add metadata information for each column supplied in the spreadsheet, info on Analytics data types:
-                            ## https://support.ptc.com/help/thingworx_hc/thingworx_analytics_8/index.html#page/analytics%2Fanalytics-data-key-infotables.html%23wwID0EONHU
-                            "fieldName": data.columns[col],
-                            "dataType": baseType,
-                            "opType": opType,
-                            "isStatic": "false",
-                            "values": valueList
-                        })
-    elif baseType == "NUMBER":
-        metadata_list.append({ # add metadata information for each column supplied in the spreadsheet, info on Analytics data types:
-                            ## https://support.ptc.com/help/thingworx_hc/thingworx_analytics_8/index.html#page/analytics%2Fanalytics-data-key-infotables.html%23wwID0EONHU
-                            "fieldName": data.columns[col],
-                            "dataType": "DOUBLE",
-                            "opType": opType,
-                            "isStatic": "false"
-                        })
-    else:
-        metadata_list.append({ # add metadata information for each column supplied in the spreadsheet, info on Analytics data types:
-                            ## https://support.ptc.com/help/thingworx_hc/thingworx_analytics_8/index.html#page/analytics%2Fanalytics-data-key-infotables.html%23wwID0EONHU
-                            "fieldName": data.columns[col],
-                            "dataType": baseType,
-                            "opType": opType,
-                            "isStatic": "false"
-                        })
+        baseType = input("Input the base type for the field named "+data.columns[col]+" (i.e. INTEGER, NUMBER, STRING, etc.):")
+        opType = input("Input the op type for the field named "+data.columns[col]+" (i.e. CONTINUOUS, CATEGORICAL, etc.):")
+        datashape_dict["fieldDefinitions"][data.columns[col]]= { #add new key to field definitions
+            "name" : data.columns[col], # name is the same value as the key 
+            "aspects" : {
+                "isPrimaryKey": "false"
+            },
+            "description": "",
+            "baseType": baseType # only numbers are used for this script, Thingworx base types that can be used with Analytics are supported, see link down below
+        }
+        if opType == "CATEGORICAL":
+            valueList = input("Input the various values for the categorical field as array (i.e. ['red','green','blue']):")
+            metadata_list.append({ # add metadata information for each column supplied in the spreadsheet, info on Analytics data types:
+                                ## https://support.ptc.com/help/thingworx_hc/thingworx_analytics_8/index.html#page/analytics%2Fanalytics-data-key-infotables.html%23wwID0EONHU
+                                "fieldName": data.columns[col],
+                                "dataType": baseType,
+                                "opType": opType,
+                                "isStatic": "false",
+                                "values": valueList
+                            })
+        elif baseType == "NUMBER":
+            metadata_list.append({ # add metadata information for each column supplied in the spreadsheet, info on Analytics data types:
+                                ## https://support.ptc.com/help/thingworx_hc/thingworx_analytics_8/index.html#page/analytics%2Fanalytics-data-key-infotables.html%23wwID0EONHU
+                                "fieldName": data.columns[col],
+                                "dataType": "DOUBLE",
+                                "opType": opType,
+                                "isStatic": "false"
+                            })
+        else:
+            metadata_list.append({ # add metadata information for each column supplied in the spreadsheet, info on Analytics data types:
+                                ## https://support.ptc.com/help/thingworx_hc/thingworx_analytics_8/index.html#page/analytics%2Fanalytics-data-key-infotables.html%23wwID0EONHU
+                                "fieldName": data.columns[col],
+                                "dataType": baseType,
+                                "opType": opType,
+                                "isStatic": "false"
+                            })
 
     payload["metadataInput"]["rows"].extend(metadata_list) # add metadata information to the payload sent to Thingworx
     #print(payload["metadataInput"]["rows"])
@@ -378,11 +378,11 @@ def getModelStatus():
     if response.status_code == 200:
         result = json.loads(response.text)
         while result["rows"][0]["state"] != "COMPLETED":
-        print("Training of the model is not finished yet.")
-        time.sleep(20)
-        response = call_thingworx_service()
-        if response.status_code == 200:
-            result = json.loads(response.text)  
+            print("Training of the model is not finished yet.")
+            time.sleep(20)
+            response = call_thingworx_service()
+            if response.status_code == 200:
+                result = json.loads(response.text)  
             
 
         status = result["rows"][0]["state"]  # read the state of the complete Thingworx response
