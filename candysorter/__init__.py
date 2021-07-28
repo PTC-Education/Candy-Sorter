@@ -105,18 +105,7 @@ def rampServoTest():
     time.sleep(1)
 
 def fullServoTest():
-    print('moving ramp servo')
-    kit.servo[rampServo].angle = MotorColorPos('orange')
-    time.sleep(1)
-    kit.servo[rampServo].angle = MotorColorPos('red')
-    time.sleep(1)
-    kit.servo[rampServo].angle = MotorColorPos('yellow')
-    time.sleep(1)
-    kit.servo[rampServo].angle = MotorColorPos('green')
-    time.sleep(1)
-    kit.servo[rampServo].angle = MotorColorPos('purple')
-    time.sleep(1)
-    print('moving feeder servo')
+    rampServoTest()
     feederServoTest()
     kit.servo[feederServo].angle = 90
     kit.servo[rampServo].angle = 90
