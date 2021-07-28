@@ -1,10 +1,10 @@
 # Candy-Sorter
 
 ## Parts
-[Color sensor](https://learn.adafruit.com/assets/59109)
-[Servo motor hat](https://www.adafruit.com/product/2327?gclid=CjwKCAjw87SHBhBiEiwAukSeUXhnyrBdVb3wdNFaqTztPAIurUUoyuI3_6jCyiNULFe7ilsiTvhqtRoCTJgQAvD_BwE)
-[Power supply](https://www.adafruit.com/product/276)
-[Raspberry Pi stacking headers](https://www.adafruit.com/product/2223)
+-[Color sensor](https://learn.adafruit.com/assets/59109)
+-[Servo motor hat](https://www.adafruit.com/product/2327?gclid=CjwKCAjw87SHBhBiEiwAukSeUXhnyrBdVb3wdNFaqTztPAIurUUoyuI3_6jCyiNULFe7ilsiTvhqtRoCTJgQAvD_BwE)
+-[Power supply](https://www.adafruit.com/product/276)
+-[Raspberry Pi stacking headers](https://www.adafruit.com/product/2223)
 
 ### Build Candy Sorting Machine (using AR work instructions)
 1. 3D print and laser cut all components 
@@ -59,10 +59,12 @@ candysorter.fullServoTest()
 ### Set up ThingWorx Entities and Test REST API Connection
 **OPTION 1 - Import DataTable Thing**
 
-Download the file named "Things_CandySorter.xml" from this repo following [these instructions](https://support.ptc.com/help/thingworx_hc/thingworx_8_hc/en/index.html#page/ThingWorx/Help/Getting_Started/ImportingandExportinginThingWorx/ImportingandExportingDataEntitiesandExtensions.html). You should then see a DataTable Thing in your ThingWorx instance which has the properties and services listed below.
+Download the files named "DataShapes_CandySorterDataShape.xml" and "Things_CandySorter.xml" from this repo, then upload them following [these instructions](https://support.ptc.com/help/thingworx_hc/thingworx_8_hc/en/index.html#page/ThingWorx/Help/Getting_Started/ImportingandExportinginThingWorx/ImportingandExportingDataEntitiesandExtensions.html). You should start by uploading the DataShapes file, then uploading the Things file. You should then see a DataTable Thing in your ThingWorx instance which has the properties and services listed below.
 
 **OPTION 2 - Create Entities Yourself**
 
-1. Create a new Data Table Thing
+1. Create a new Data Shape with the following field definitions
+2. Create a new Data Table Thing with the following template
+3. Add the following field definitions
 
 ### Calibrate Machine and Train Model
