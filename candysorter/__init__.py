@@ -198,13 +198,13 @@ def GetData():
     transformed_data =  {'rows': []}
     for row in range(len(data.values)):
     # create an empty dictionary for each row
-    dict= {}
-    for col in range(len(data.values[0])):
-        # add new key - value pairs for the dict, one pair for each column
-        dict [data.columns[col]] = data.values[row][col] 
+        dict= {}
+        for col in range(len(data.values[0])):
+            # add new key - value pairs for the dict, one pair for each column
+            dict [data.columns[col]] = data.values[row][col] 
 
-    # append the dictionary of one row to the list of dictionaries
-    transformed_data['rows'].append(dict)
+        # append the dictionary of one row to the list of dictionaries
+        transformed_data['rows'].append(dict)
 
     return transformed_data
 
