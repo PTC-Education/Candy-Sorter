@@ -1,27 +1,27 @@
 # Candy-Sorter
 
 ## Parts
--[Color sensor](https://learn.adafruit.com/assets/59109)
--[Servo motor hat](https://www.adafruit.com/product/2327?gclid=CjwKCAjw87SHBhBiEiwAukSeUXhnyrBdVb3wdNFaqTztPAIurUUoyuI3_6jCyiNULFe7ilsiTvhqtRoCTJgQAvD_BwE)
--[Power supply](https://www.adafruit.com/product/276)
--[Raspberry Pi stacking headers](https://www.adafruit.com/product/2223)
+* [Color sensor](https://learn.adafruit.com/assets/59109)
+* [Servo motor hat](https://www.adafruit.com/product/2327?gclid=CjwKCAjw87SHBhBiEiwAukSeUXhnyrBdVb3wdNFaqTztPAIurUUoyuI3_6jCyiNULFe7ilsiTvhqtRoCTJgQAvD_BwE)
+* [Power supply](https://www.adafruit.com/product/276)
+* [Raspberry Pi stacking headers](https://www.adafruit.com/product/2223)
 
 ### Build Candy Sorting Machine (using AR work instructions)
 1. 3D print and laser cut all components 
-2. Assmeble the base with motors (do not attach hubs yet)
-3. Press fit or hot glue servo hubs into the feeder disk and ramp (do not attach hubs yet)
-4. Solder motor shield and sensor, and connect wires
+1. Assmeble the base with motors (do not attach hubs yet)
+1. Press fit or hot glue servo hubs into the feeder disk and ramp (do not attach hubs yet)
+1. Solder motor shield and sensor, and connect wires
 
 
 ### Set up Raspberry Pi
 1. Flash clean image of raspian to an SD card, boot up pi, and connect to internet
-2. Connect to pi over vnc (recommended) or headless with ssh
-3. Enable I2C pins and remote GPIO control
-4. Clone this repo
-```
+1. Connect to pi over vnc (recommended) or headless with ssh
+1. Enable I2C pins and remote GPIO control
+1. Clone this repo
+`
 git clone https://github.com/PTC-Education/Candy-Sorter
-```
-5. Run the following commands from within the CandySorter folder in the terminal on the Raspberry Pi (run "cd CandySorter" from terminal to get into the CandySorter folder on the pi)
+`
+1. Run the following commands from within the CandySorter folder in the terminal on the Raspberry Pi (run "cd CandySorter" from terminal to get into the CandySorter folder on the pi)
 ```
 sudo pip3 install adafruit-circuitpython-servokit
 sudo pip3 install adafruit-circuitpython-tcs34725
@@ -64,7 +64,8 @@ Download the files named "DataShapes_CandySorterDataShape.xml" and "Things_Candy
 **OPTION 2 - Create Entities Yourself**
 
 1. Create a new Data Shape with the following field definitions
-2. Create a new Data Table Thing with the following template
-3. Add the following field definitions
+[]
+3. Create a new Data Table Thing with the following template
+4. Add the following field definitions
 
 ### Calibrate Machine and Train Model
