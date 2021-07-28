@@ -184,7 +184,7 @@ def GetData():
     print(response)
 
     with open('trainingdata.csv','w') as f:
-    f.write(response.text)
+        f.write(response.text)
 
     data = pd.read_csv('trainingdata.csv')
     data.drop('key', inplace=True, axis=1)
