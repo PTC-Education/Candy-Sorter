@@ -212,6 +212,11 @@ def callTrainModelService():
     transformed_data, data = GetData()
     twService = "Services/TrainAnalyticsModel"
     goal = input("Which of the following fields "+str(data.columns)+" is the goal you'd like to predict?")
+    headers = {
+      'appKey': appKey,
+      'Content-Type': 'application/json',
+      'accept': 'application/json'
+    }
     payload = {"goal": goal, # use the input from the user as goal 
                 "trainingData": { # Thingworx Infotable containing the training data
                     "dataShape": { # Thingworx needs this information to know which name and data types the individual columns in spreadsheet have
