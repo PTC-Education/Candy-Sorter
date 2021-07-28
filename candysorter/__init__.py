@@ -206,10 +206,10 @@ def GetData():
         # append the dictionary of one row to the list of dictionaries
         transformed_data['rows'].append(dict)
 
-    return transformed_data
+    return transformed_data, data
 
 def callTrainModelService():
-    data = GetData()
+    transformed_data, data = GetData()
     twService = "Services/TrainAnalyticsModel"
     goal = input("Which of the following fields "+str(data.columns)+" is the goal you'd like to predict?")
     payload = {"goal": goal, # use the input from the user as goal 
@@ -218,7 +218,7 @@ def callTrainModelService():
                         "fieldDefinitions": { # add a empty dictionary, data shape information gets filled in later
                         }
                     },
-                "rows": data["rows"]}, # each row contains the values of one row of the spreadsheet that was read in before
+                "rows": transformed_data["rows"]}, # each row contains the values of one row of the spreadsheet that was read in before
                 "metadataInput": { # Thingworx Analytics need additional information of the data supplied for training
                     "dataShape": { # Same reason as above, used to define the structure of the Thingworx Infotable
                         "fieldDefinitions": { # following fields are the Infotable structure for AnalyticsDatasetMetadataFlattened Infotable
