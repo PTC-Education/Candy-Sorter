@@ -21,9 +21,9 @@ The original version of the candy sorting machine was made to sort skittles, but
 
 
 ## Set up Raspberry Pi
-1. Flash clean image of raspian to an SD card, boot up pi, and connect to internet
+1. Flash clean image of raspian to an SD card, boot up pi, and connect to internet. Setup instructions can be found on [this page](https://www.raspberrypi.org/documentation/setup/).
 1. Connect to pi over vnc (recommended) or headless with ssh
-1. Enable I2C pins and remote GPIO control
+1. Enable I2C pins and remote GPIO control from the "Interfaces" menu after typing `sudo raspi-config`
 1. Clone this repo
 `
 git clone https://github.com/PTC-Education/Candy-Sorter
@@ -68,7 +68,9 @@ candysorter.fullServoTest()
 **OPTION 1 - Import DataTable Thing**
 
 1. Download the files named "DataShapes_CandySorterDataShape.xml" and "Things_CandySorter.xml" from this repo, then upload them following [these instructions](https://support.ptc.com/help/thingworx_hc/thingworx_8_hc/en/index.html#page/ThingWorx/Help/Getting_Started/ImportingandExportinginThingWorx/ImportingandExportingDataEntitiesandExtensions.html). You should start by uploading the DataShapes file, then uploading the Things file. You should then see a DataTable Thing in your ThingWorx instance which has the properties and services listed below.
-2. 
+2. Create an AppKey that has permisions to interact with the Data Table thing, then run the following script from your python repl
+`candysorter.setThingWorxCreds()`
+3. Run the following script from the python repl to test the connection to ThingWorx `candysorter.testConnection()` and ensure you see a 200 response status code.
 
 **OPTION 2 - Create Entities Yourself**
 
@@ -80,7 +82,8 @@ candysorter.fullServoTest()
 <img src="./Resources/DataTableProperties.png" alt="DataTableProperties"/>
 4. Created four custom services in the data table that are named the same as the .js files in the ["ThingWorx Services" folder](https://github.com/PTC-Education/Candy-Sorter/tree/main/ThingWorx%20Services) in this repo. Make sure you also add the inputs from the screenshot below and specify the data type for the output.
 <img src="./Resources/DataTableServices.png" alt="DataTableServices"/>
-5. Create an AppKey that has permisions to interact with the Data Table thing, then run 
-
+5. Create an AppKey that has permisions to interact with the Data Table thing, then run the following script from your python repl
+`candysorter.setThingWorxCreds()`
+6. Run the following script from the python repl to test the connection to ThingWorx `candysorter.testConnection()` and ensure you see a 200 response status code.
 
 ## Calibrate Machine and Train Model
