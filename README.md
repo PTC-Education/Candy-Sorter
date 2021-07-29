@@ -1,10 +1,12 @@
 # Candy-Sorter
 
 ## Parts
-* [Color sensor](https://learn.adafruit.com/assets/59109)
-* [Servo motor hat](https://www.adafruit.com/product/2327?gclid=CjwKCAjw87SHBhBiEiwAukSeUXhnyrBdVb3wdNFaqTztPAIurUUoyuI3_6jCyiNULFe7ilsiTvhqtRoCTJgQAvD_BwE)
+* [Color sensor option 1 - soldering required, better quality](https://learn.adafruit.com/assets/59109)
+* [Color sensor option 2 - no soldering required](https://www.waveshare.com/color-sensor.htm)
+* [Servo motor hat option 1 - soldering required](https://www.adafruit.com/product/2327?gclid=CjwKCAjw87SHBhBiEiwAukSeUXhnyrBdVb3wdNFaqTztPAIurUUoyuI3_6jCyiNULFe7ilsiTvhqtRoCTJgQAvD_BwE)
+* [Servo motor hat option 2 - no soldering required](https://www.waveshare.com/product/raspberry-pi/hats/servo-driver-hat.htm)
 * [Power supply](https://www.adafruit.com/product/276)
-* [Raspberry Pi stacking headers](https://www.adafruit.com/product/2223)
+* [Raspberry Pi stacking headers (for option 2)](https://www.adafruit.com/product/2223)
 
 ### Build Candy Sorting Machine (using AR work instructions)
 1. 3D print and laser cut all components 
@@ -64,8 +66,12 @@ Download the files named "DataShapes_CandySorterDataShape.xml" and "Things_Candy
 **OPTION 2 - Create Entities Yourself**
 
 1. Create a new Data Shape with the following field definitions
-[]
-3. Create a new Data Table Thing with the following template
-4. Add the following field definitions
+<img src="./Resources/DataShapeFields.png" alt="DataShape"/>
+2. Create a new Data Table Thing with the following template and select the data shape you've just made for the data shape
+<img src="./Resources/DataTableTemplate.png" alt="DataTable" width="50%"/>
+3. Add the following properties to the data table thing
+<img src="./Resources/DataTableProperties.png" alt="DataTableProperties"/>
+4. Created four custom services in the data table that are named the same as the .js files in the ["ThingWorx Services" folder]("./ThingWorx Services") in this repo. Make sure you also add the inputs from the screenshot below and specify the data type for the output.
+<img src="./Resources/DataTableServices.png" alt="DataTableServices"/>
 
 ### Calibrate Machine and Train Model
