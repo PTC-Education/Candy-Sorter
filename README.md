@@ -1,5 +1,7 @@
 # Candy-Sorter
 
+<img src="./Resources/CandySorterOnshapeAnimation.gif" alt="DataTable" width="50%" class="center"/>
+
 ## Parts
 * [Color sensor option 1 - soldering required, better quality](https://learn.adafruit.com/assets/59109)
 * [Color sensor option 2 - no soldering required](https://www.waveshare.com/color-sensor.htm)
@@ -23,7 +25,7 @@
 `
 git clone https://github.com/PTC-Education/Candy-Sorter
 `
-1. Run the following commands from within the CandySorter folder in the terminal on the Raspberry Pi (run "cd CandySorter" from terminal to get into the CandySorter folder on the pi)
+1. Run the following commands from within the CandySorter folder in the terminal on the Raspberry Pi (run `cd CandySorter` from terminal to get into the CandySorter folder on the pi)
 ```
 sudo pip3 install adafruit-circuitpython-servokit
 sudo pip3 install adafruit-circuitpython-tcs34725
@@ -57,6 +59,7 @@ candysorter.setFeederPos()
 candysorter.fullServoTest()
 ```
 5. Attach feeder disk to the servo so that the candy hole is lined up with where the sensor goes and the ramp so it is pointing toward the middle color bin.
+<img src="./Resources/CandySorterServoAlignment.jpg" alt="MotorPosition" width="50%"/>
 
 ### Set up ThingWorx Entities and Test REST API Connection
 **OPTION 1 - Import DataTable Thing**
