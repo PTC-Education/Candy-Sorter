@@ -71,7 +71,7 @@ Download the files named "DataShapes_CandySorterDataShape.xml" and "Things_Candy
 <img src="./Resources/DataTableTemplate.png" alt="DataTable" width="50%"/>
 3. Add the following properties to the data table thing
 <img src="./Resources/DataTableProperties.png" alt="DataTableProperties"/>
-4. Created four custom services in the data table that are named the same as the .js files in the ["ThingWorx Services" folder]("./ThingWorx Services") in this repo. Make sure you also add the inputs from the screenshot below and specify the data type for the output.
+4. Created four custom services in the data table that are named the same as the .js files in the ["ThingWorx Services" folder](https://github.com/PTC-Education/Candy-Sorter/tree/main/ThingWorx%20Services) in this repo. Make sure you also add the inputs from the screenshot below and specify the data type for the output.
 <img src="./Resources/DataTableServices.png" alt="DataTableServices"/>
 
 ### Calibrate Machine and Train Model
