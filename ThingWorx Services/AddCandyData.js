@@ -1,5 +1,3 @@
-// Service for adding data to a ThingWorx data table thing
-
 me.R = inR;
 me.G = inG;
 me.B = inB;
