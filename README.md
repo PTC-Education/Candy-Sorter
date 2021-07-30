@@ -95,7 +95,6 @@ candysorter.sensorTest()
 and run the settings scripts if things are not working
 ```
 candysorter.setServoNumbers()
-candysorter.setThingWorxCreds()
 candysorter.setColorPos()
 candysorter.setFeederPos()
 ```
@@ -128,12 +127,16 @@ candysorter.fullServoTest()
 
 1. Create a new Data Shape with the following field definitions
 <img src="./Resources/DataShapeFields.png" alt="DataShape"/>
+  
 2. Create a new Data Table Thing with the following template and select the data shape you've just made for the data shape
 <img src="./Resources/DataTableTemplate.png" alt="DataTable" width="50%"/>
+  
 3. Add the following properties to the data table thing
 <img src="./Resources/DataTableProperties.png" alt="DataTableProperties"/>
+  
 4. Created four custom services in the data table that are named the same as the .js files in the <a href="https://github.com/PTC-Education/Candy-Sorter/tree/main/ThingWorx%20Services">ThingWorx Services folder</a> in this repo. Make sure you also add the inputs from the screenshot below and specify the data type for the output.
 <img src="./Resources/DataTableServices.png" alt="DataTableServices"/>
+  
 5. Create an AppKey that has permisions to interact with the Data Table thing, then run the following script from your python repl
 `candysorter.setThingWorxCreds()`
 6. Run the following script from the python repl to test the connection to ThingWorx `candysorter.testConnection()` and ensure you see a 200 response status code.
@@ -141,7 +144,30 @@ candysorter.fullServoTest()
   </details>
   
 ## Train Model
-<details><summary><b>How to train a model</b></summary>
+<details><summary><b>Build data set</b></summary>
 
-* Now you are ready to train your model. You 
+* Now you are ready to train your model. From your repl you can now run `candysorter.mainTraining(5)`. The input parameter to the mainTraining function is the number of times each color input will be added to the data table.
+* The repl will ask you to input the color skittle each time. If there is no skittle, you can just click enter and "none" will be added to the 
+* Check the mashup of your data table to make sure data is being added.
+* Add as many rows as you think the model will need to learn (you can always add more and retrain)
+  
+  </details>
+  
+<details><summary><b>Train the model</b></summary>
 
+1. Run `candysorter.trainModel()` from the repl. 
+2. This script will first export the data from your data table into python, then gets rid of any unnecessary columns, then formats as an infotable and sends it to the TrainingThing on the Analytics Server. **Make sure you've set the "AnalyticsServerString" property in ThingWorx to match your analytics string**
+3. The script should prompt you to type in the data type and operational type of each of the fields. 
+    1. For the Red, Green, and Blue fields, they should be `INTEGER` and `CONTINUOUS`.
+    2. The Temperature and Lux fields should be `NUMBER` and `CONTINUOUS`.
+    3. The Color field should be `STRING` and `CATEGORICAL`. 
+    4. And for the values of the Color field, you should put in the values as an array `["red","green","orange","purple","yellow","none"]`
+4. If everything worked well, you should get a Model URI back from ThingWorx, and the ModelURI property in your Data Thing should be updated.
+  </details>
+  
+<details><summary><b>Get Model Status</b></summary>
+
+1. From the repl, run `candysorter.getModelStatus()`. This service will ask ThingWorx for the model status every 20 seconds until it is complete.
+
+
+</details>
