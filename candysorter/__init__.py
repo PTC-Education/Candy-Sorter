@@ -158,6 +158,19 @@ def LogData(RGB,L,T,color):
 
     print(response.status_code)
 
+def testConnection():
+    twProperties = "Properties/Red"
+    payload={}
+    headers = {
+      'appKey': appKey,
+      'Content-Type': 'application/json',
+      'accept': 'application/json'
+    }
+
+    response = requests.request("GET", baseURL+twProperties, headers=headers, data=json.dumps(payload))
+
+    print(response.status_code)
+
 def GetData():
     twService = "Services/SearchDataTableEntries"
 
