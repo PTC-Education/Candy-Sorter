@@ -8,17 +8,9 @@ The goal of the candy sorter activity is to introduce students to the process of
 #### This tutorial shows you how to put together the candy sorting machine found in [this Onshape document](https://cad.onshape.com/documents/9538cae8040bf2539c85bf1f/w/b1f052bee86b8f568c4616e4/e/a4dabf18665eca6b067f7bca)
 The original version of the candy sorting machine was made to sort skittles, but the model can be configured to fit any size candy of different color.
 
-### Parts
-<img src="./Resources/CandySorterParts.jpg" alt="CandySorterOnshapeAnimation" width="50%" align="middle"/>
+#### Parts
+<img src="./Resources/CandySorterParts.jpg" width="40%" align="middle"/>
 
-<details><summary><b>Software</b></summary>
-<ul>
-<li>Onshape</li>
-<li>ThingWorx</li>
-<li>Vuforia View</li>
-</ul>
-</details>
-  
 <details><summary><b>Hardware</b></summary>
 <ul>
   <li><a href="https://www.raspberrypi.org/">Raspberry Pi</a> (tested with 3B+, Pi Zero W and Pi 4 being tested currently)</li>
@@ -30,6 +22,19 @@ The original version of the candy sorting machine was made to sort skittles, but
 <li><a href="https://www.adafruit.com/product/2223">Raspberry Pi stacking headers (for option 2)</a></li>
 </ul>
 </details>
+
+#### Technology Map
+<img src="./Resources/CandySorterTechMap.jpg" width="70%" align="middle"/>
+
+<details><summary><b>Software</b></summary>
+<ul>
+<li>Onshape</li>
+<li>ThingWorx</li>
+<li>Vuforia View</li>
+</ul>
+</details>
+  
+
   
   
 <h2> Build Candy Sorting Machine (using AR work instructions)</h2>
@@ -82,14 +87,13 @@ sudo apt-get install python3-pandas
 
 `python3`
 </li>
-<li>
+<li>Import the candysorter python library
   
-  Import the candysorter python library
 `import candysorter`
     </li>
-<li>
+
+<li>Run the test scripts
   
-  Run the test scripts
 ```
 candysorter.feederServoTest()
 candysorter.rampServoTest()
@@ -101,14 +105,15 @@ candysorter.setServoNumbers()
 candysorter.setColorPos()
 candysorter.setFeederPos()
 ```
-    </li>
-<li>
+
+
+<li>Once everything looks good, run the full motor test script. Motors will end at 90 degrees.
   
-  Once everything looks good, run the full motor test script. Motors will end at 90 degrees.
 ```
 candysorter.fullServoTest()
 ```
-    </li>
+
+    
 <li>Attach feeder disk to the servo so that the candy hole is lined up with where the sensor goes and the ramp so it is pointing toward the middle color bin.<br>
   <img src="./Resources/CandySorterServoAlignment.jpg" alt="MotorPosition" width="50%"/></li>
 </ol>
@@ -174,3 +179,9 @@ candysorter.fullServoTest()
 
 
 </details>
+
+## Automated Run
+Once the model has finished training, you are ready to automate the candy sorter with real time predicitons from the ThingWorx Analytics model. The script below will send the sensor values to the model in ThingWorx and get back the prediction as to what color is currently in front of the sensor.
+```
+candysorter.mainAutoSort()
+```
