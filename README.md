@@ -8,6 +8,9 @@ The goal of the candy sorter activity is to introduce students to the process of
 #### This tutorial shows you how to put together the candy sorting machine found in [this Onshape document](https://cad.onshape.com/documents/9538cae8040bf2539c85bf1f/w/b1f052bee86b8f568c4616e4/e/a4dabf18665eca6b067f7bca)
 The original version of the candy sorting machine was made to sort skittles, but the model can be configured to fit any size candy of different color.
 
+### Parts
+<img src="./Resources/CandySorterParts.jpg" alt="CandySorterOnshapeAnimation" width="50%" align="middle"/>
+
 <details><summary><b>Software</b></summary>
 <ul>
 <li>Onshape</li>
