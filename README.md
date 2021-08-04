@@ -8,10 +8,21 @@ The goal of the candy sorter activity is to introduce students to the process of
 #### This tutorial shows you how to put together the candy sorting machine found in [this Onshape document](https://cad.onshape.com/documents/9538cae8040bf2539c85bf1f/w/b1f052bee86b8f568c4616e4/e/a4dabf18665eca6b067f7bca)
 The original version of the candy sorting machine was made to sort skittles, but the model can be configured to fit any size candy of different color.
 
+#### Technology Map
+<img src="./Resources/CandySorterTechMap.jpg" width="100%" align="middle"/>
+
+<details open><summary><b>Software</b></summary>
+<ul>
+<li>Onshape</li>
+<li>ThingWorx</li>
+<li>Vuforia View</li>
+</ul>
+</details>
+
 #### Parts
 <img src="./Resources/CandySorterParts.jpg" width="40%" align="middle"/>
 
-<details><summary><b>Hardware</b></summary>
+<details open><summary><b>Hardware</b></summary>
 <ul>
   <li><a href="https://www.raspberrypi.org/">Raspberry Pi</a> (tested with 3B+, Pi Zero W and Pi 4 being tested currently)</li>
 <li><a href="https://learn.adafruit.com/assets/59109">Color sensor option 1 - soldering required, better quality</a></li>
@@ -22,19 +33,6 @@ The original version of the candy sorting machine was made to sort skittles, but
 <li><a href="https://www.adafruit.com/product/2223">Raspberry Pi stacking headers (for option 2)</a></li>
 </ul>
 </details>
-
-#### Technology Map
-<img src="./Resources/CandySorterTechMap.jpg" width="70%" align="middle"/>
-
-<details><summary><b>Software</b></summary>
-<ul>
-<li>Onshape</li>
-<li>ThingWorx</li>
-<li>Vuforia View</li>
-</ul>
-</details>
-  
-
   
   
 <h2> Build Candy Sorting Machine (using AR work instructions)</h2>
