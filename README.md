@@ -1,6 +1,14 @@
 # Candy-Sorter
 
-<img src="./Resources/CandySorterOnshapeAnimation.gif" alt="CandySorterOnshapeAnimation" width="50%" align="middle"/>
+<table>
+  <tr><th>
+      <p style="text-align:center"><img src="./Resources/CandySorterTraining.gif" alt="CandySorterOnshapeAnimation" width="100%" align="middle"/></p>
+  </th>
+  <th>
+      <p style="text-align:center"><img src="./Resources/CandySorterOnshapeAnimation.gif" alt="CandySorterOnshapeAnimation" width="70%" align="middle"/></p>
+    </th></tr>
+</table>
+
 
 ## What is this?
 The goal of the candy sorter activity is to introduce students to the process of designing, building, and analyzing a closed loop manufacturing process. 
