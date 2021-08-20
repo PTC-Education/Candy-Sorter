@@ -187,7 +187,12 @@ candysorter.fullServoTest()
 </details>
 
 ## Automated Run
+<details><summary><b>Run the Candy Sorter with Live Predictions</b></summary>
 Once the model has finished training, you are ready to automate the candy sorter with real time predicitons from the ThingWorx Analytics model. The script below will send the sensor values to the model in ThingWorx and get back the prediction as to what color is currently in front of the sensor.
+  
+  
 ```
 candysorter.mainAutoSort()
 ```
+  
+</details>
