@@ -13,18 +13,10 @@ import adafruit_tcs34725
 
 motordriver = 0
 
-try:
-    from adafruit_servokit import ServoKit
-    kit = ServoKit(channels=16)
-    i2c = board.I2C()
-    sensor = adafruit_tcs34725.TCS34725(i2c)
-    motordriver = 1
-except:
-    from candysorter.PCA9685 import PCA9685
-    pwm = PCA9685(0x40, debug=False)
-    pwm.setPWMFreq(50)
-    motordriver = 2
-
+## 
+## 
+## Set Defaults
+##
 ## Set ThingWorx Parameters
 baseURL = "https://pp-2101111403aw.portal.ptc.io/Thingworx/Things/CandySorter/"
 appKey = '156f0901-bed5-41fb-a2bd-34b5580ecf38'
@@ -33,7 +25,7 @@ appKey = '156f0901-bed5-41fb-a2bd-34b5580ecf38'
 feederServo = 6
 rampServo = 7
 
-## Set Ramp Servo Positions
+## Set Default Ramp Servo Positions
 orangePos = 120
 redPos = 98
 yellowPos = 75
@@ -44,6 +36,32 @@ purplePos = 30
 hopperPos = 160
 sensorPos = 90
 rampPos = 20
+
+##
+##
+## Set MotorDriver type and default positions if not driver 1
+##
+try:
+    from adafruit_servokit import ServoKit
+    kit = ServoKit(channels=16)
+    i2c = board.I2C()
+    sensor = adafruit_tcs34725.TCS34725(i2c)
+    motordriver = 1
+except:
+    from candysorter.PCA9685 import PCA9685
+    pwm = PCA9685(0x40, debug=False)
+    pwm.setPWMFreq(50)
+    motordriver = 2    
+    ## Set Default Ramp Servo Positions
+    orangePos = 2200
+    redPos = 2000
+    yellowPos = 1600
+    greenPos = 1200
+    purplePos = 800
+    ## Set Feeder Disk Motor Positions
+    hopperPos = 2200
+    sensorPos = 1500
+    rampPos = 800
 
 ##
 ## Define Settings Functions
@@ -81,7 +99,7 @@ def setFeederPos():
     sensorPos = int(input("Input new sensor position angle: (current position is "+str(sensorPos)+"):"))
     rampPos = int(input("Input new ramp position angle: (current position is "+str(rampPos)+"):"))
 
-## Set Ramp Motor Positions
+## Define Motor Position function
 def MotorColorPos(argument):
     switcher = {
         'orange': orangePos,
@@ -106,31 +124,59 @@ def servoDriverTest():
 
 def feederServoTest():
     print('moving feeder servo')
-    kit.servo[feederServo].angle = hopperPos
-    time.sleep(1)
-    kit.servo[feederServo].angle = sensorPos
-    time.sleep(1)
-    kit.servo[feederServo].angle = rampPos
-    time.sleep(1)
+    if motordriver == 1:
+        kit.servo[feederServo].angle = hopperPos
+        time.sleep(1)
+        kit.servo[feederServo].angle = sensorPos
+        time.sleep(1)
+        kit.servo[feederServo].angle = rampPos
+        time.sleep(1)
+    elif motordriver == 2:
+        pwm.setServoPulse(feederServo,hopperPos)
+        time.sleep(1)
+        pwm.setServoPulse(feederServo,sensorPos)
+        time.sleep(1)
+        pwm.setServoPulse(feederServo,rampPos)
+        time.sleep(1)
+    else:
+        print('error running motors')
 
 def rampServoTest():
     print('moving ramp servo')
-    kit.servo[rampServo].angle = MotorColorPos('orange')
-    time.sleep(1)
-    kit.servo[rampServo].angle = MotorColorPos('red')
-    time.sleep(1)
-    kit.servo[rampServo].angle = MotorColorPos('yellow')
-    time.sleep(1)
-    kit.servo[rampServo].angle = MotorColorPos('green')
-    time.sleep(1)
-    kit.servo[rampServo].angle = MotorColorPos('purple')
-    time.sleep(1)
+    if motordriver == 1:
+        kit.servo[rampServo].angle = MotorColorPos('orange')
+        time.sleep(1)
+        kit.servo[rampServo].angle = MotorColorPos('red')
+        time.sleep(1)
+        kit.servo[rampServo].angle = MotorColorPos('yellow')
+        time.sleep(1)
+        kit.servo[rampServo].angle = MotorColorPos('green')
+        time.sleep(1)
+        kit.servo[rampServo].angle = MotorColorPos('purple')
+        time.sleep(1)
+    elif motordriver == 2:
+        pwm.setServoPulse(rampServo,MotorColorPos('orange'))
+        time.sleep(1)
+        pwm.setServoPulse(rampServo,MotorColorPos('red'))
+        time.sleep(1)
+        pwm.setServoPulse(rampServo,MotorColorPos('yellow'))
+        time.sleep(1)
+        pwm.setServoPulse(rampServo,MotorColorPos('green'))
+        time.sleep(1)
+        pwm.setServoPulse(rampServo,MotorColorPos('purple'))
+        time.sleep(1)
+    else:
+        print('motor driver error')
 
 def fullServoTest():
     rampServoTest()
     feederServoTest()
-    kit.servo[feederServo].angle = 90
-    kit.servo[rampServo].angle = 90
+    if motordriver == 1:
+        kit.servo[feederServo].angle = 90
+        kit.servo[rampServo].angle = 90
+    elif motordriver == 2:
+        pwm.setServoPulse(rampServo,1500)
+        pwm.setServoPulse(feederServo,1500)
 
 def sensorTest():
     RGB = sensor.color_rgb_bytes
@@ -483,7 +529,7 @@ def mainTraining(duplicationNum):
                 LogData(sensor.color_rgb_bytes,sensor.lux,sensor.color_temperature,color)
             kit.servo[rampServo].angle = MotorColorPos(color)
             time.sleep(0.5)
-            kit.servo[feederServo].angle = 15 # Ramp position
+            kit.servo[feederServo].angle = rampPos # Ramp position
             time.sleep(0.5)
 
 
