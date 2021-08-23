@@ -3,6 +3,7 @@ print(f'Invoking __init__.py for {__name__}')
 import time
 import requests
 import json
+import numpy
 import pandas as pd
 import smbus
 import math
