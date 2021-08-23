@@ -77,6 +77,7 @@ git clone https://github.com/PTC-Education/Candy-Sorter
 ```
 sudo pip3 install adafruit-circuitpython-servokit
 sudo pip3 install adafruit-circuitpython-tcs34725
+sudo apt-get install libatlas-base-dev
 sudo apt-get install python3-pandas
 ```
   </li>
