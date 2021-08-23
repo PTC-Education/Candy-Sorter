@@ -494,6 +494,7 @@ def mainTraining(duplicationNum):
 ##
 
 def OnshapeConfigClient():
+    print('Importing Onshape Python client - may take a minute')
     global client
     global base
     from onshape_client.client import Client
@@ -535,8 +536,12 @@ def OnshapeMassProp():
 def OnshapeSetDocIds():
     global did
     global wid
-    did = input('What is the document id of your onshape document?')
-    wid = input('What is the workspace id of your onshape document?')
+    did = input('What is the Onshape documents document id? ')
+    wid = input('What is the Onshape documents workspace id? ')
+
+def OnshapeSetStorage():
+    global eid
+    eid = input('What is the element id of the storage AppElement in Onshape? ')
 
 def OnshapeCreateStorage():
     fixed_url = '/api/appelements/d/did/w/wid'
@@ -625,14 +630,14 @@ def OnshapeUpdateJsonDataArray(value):
     # Insertion: { 'btType' : 'BTJEditInsert-2523', 'path' : path, 'value' : newValue }
     jsonTreeData = OnshapeGetJsonTree()
     dataArray = jsonTreeData['tree']['data']
-    dataArray = dataArray.append(value)
+    dataArray.append(value)
 
     params = {}
     payload = {
         "parentChangeId": jsonTreeData['changeId'],
         "jsonTreeEdit": {"btType" : "BTJEditChange-2636", 
                         "path" : { 'btType' : 'BTJPath-3073', 'startNode' : '', 'path' : [{ 'btType' : 'BTJPathKey-3221', 'key' : 'data' }] }, 
-                        'value' : value }
+                        'value' : dataArray }
         }
 
     headers = {'Accept': 'application/vnd.onshape.v1+json',
@@ -676,3 +681,4 @@ def OnshapeAddJsonKey(key,value):
     # The command below prints the entire JSON response from Onshape
     return parsed['errorDescription']
 
+def OnshapeClearJsonTree():
