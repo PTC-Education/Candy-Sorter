@@ -487,12 +487,12 @@ def mainTraining(duplicationNum):
         if MotorColorPos(color)=="nothing":
             print("no skittle - time to shake!")
             RGB = sensor.color_rgb_bytes
-            UpdateJsonDataArray(RGB[0],RGB[1],RGB[2],sensor.lux,sensor.color_temperature,"none")
+            UpdateJsonDataArray([RGB[0],RGB[1],RGB[2],sensor.lux,sensor.color_temperature,"none"])
             Shake()
         else:
             newData = []
             for i in range(duplicationNum):
-                newData.append(RGB[0],RGB[1],RGB[2],sensor.lux,sensor.color_temperature,color)
+                newData.append([RGB[0],RGB[1],RGB[2],sensor.lux,sensor.color_temperature,color])
             UpdateJsonDataArray(newData)
             if motordriver == 1:
                 kit.servo[rampServo].angle = MotorColorPos(color)
