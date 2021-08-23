@@ -79,6 +79,7 @@ sudo pip3 install adafruit-circuitpython-servokit
 sudo pip3 install adafruit-circuitpython-tcs34725
 sudo apt-get install libatlas-base-dev
 sudo apt-get install python3-pandas
+pip3 install onshape-client
 ```
   </li>
     
