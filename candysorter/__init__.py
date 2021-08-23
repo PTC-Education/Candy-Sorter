@@ -493,7 +493,7 @@ def mainTraining(duplicationNum):
 ##
 ##
 
-def ConfigOnshapeClient():
+def OnshapeConfigClient():
     global client
     global base
     from onshape_client.client import Client
@@ -531,3 +531,115 @@ def OnshapeMassProp():
     parsed = json.loads(response.data)
     # The command below prints the entire JSON response from Onshape
     print(json.dumps(parsed, indent=4, sort_keys=True))
+
+def OnshapeSetDocIds():
+    global did
+    global wid
+    did = input('What is the document id of your onshape document?')
+    wid = input('What is the workspace id of your onshape document?')
+
+def OnshapeCreateStorage():
+    fixed_url = '/api/appelements/d/did/w/wid'
+    global eid
+
+    method = 'POST'
+
+    params = {}
+    payload = {
+        "formatId": "com.onshapeiot",
+        "name": "IoT Data",
+        "description": "Created App Element",
+        "jsonTree": {"hello":"world"}
+        }
+    headers = {'Accept': 'application/vnd.onshape.v1+json',
+            'Content-Type': 'application/json'}
+
+    fixed_url = fixed_url.replace('did', did)
+    fixed_url = fixed_url.replace('wid', wid)
+
+    response = client.api_client.request(method, url=base + fixed_url, query_params=params, headers=headers, body=payload)
+
+    parsed = json.loads(response.data)
+    # The command below prints the entire JSON response from Onshape
+    eid = parsed['elementId']
+    print('Storage element Id set to '+eid)
+
+def OnshapeGetJsonTree():
+    fixed_url = '/api/appelements/d/did/w/wid/e/eid/content/json'
+
+    method = 'GET'
+
+    params = {}
+    payload = {}
+    headers = {'Accept': 'application/vnd.onshape.v2+json',
+                'Content-Type': 'application/json'}
+
+    fixed_url = fixed_url.replace('did', did)
+    fixed_url = fixed_url.replace('wid', wid)
+    fixed_url = fixed_url.replace('eid', eid)
+
+    # print(base + fixed_url)
+
+    response = client.api_client.request(method, url=base + fixed_url, query_params=params, headers=headers, body=payload)
+
+    parsed = json.loads(response.data)
+    # The command below prints the entire JSON response from Onshape
+    # print(json.dumps(parsed, indent=4, sort_keys=True))
+    return parsed
+
+def OnshapeUpdateJsonKey(key,value):
+    fixed_url = '/api/appelements/d/did/w/wid/e/eid/content'
+
+    method = 'POST'
+
+    # Insertion: { 'btType' : 'BTJEditInsert-2523', 'path' : path, 'value' : newValue }
+
+    params = {}
+    payload = {
+        "parentChangeId": OnshapeGetJsonTree()['changeId'],
+        "jsonTreeEdit": {"btType" : "BTJEditChange-2636", 
+                        "path" : { 'btType' : 'BTJPath-3073', 'startNode' : '', 'path' : [{ 'btType' : 'BTJPathKey-3221', 'key' : key }] }, 
+                        'value' : value }
+        }
+
+    headers = {'Accept': 'application/vnd.onshape.v1+json',
+            'Content-Type': 'application/json'}
+
+    fixed_url = fixed_url.replace('did', did)
+    fixed_url = fixed_url.replace('wid', wid)
+    fixed_url = fixed_url.replace('eid', eid)
+
+    response = client.api_client.request(method, url=base + fixed_url, query_params=params, headers=headers, body=payload)
+
+    parsed = json.loads(response.data)
+    # The command below prints the entire JSON response from Onshape
+    return parsed['errorDescription']
+
+def OnshapeAddJsonKey(key,value):
+    fixed_url = '/api/appelements/d/did/w/wid/e/eid/content'
+
+    method = 'POST'
+
+    # Insertion: { 'btType' : 'BTJEditInsert-2523', 'path' : path, 'value' : newValue }
+
+    params = {}
+    payload = {
+        "parentChangeId": OnshapeGetJsonTree()['changeId'],
+        "jsonTreeEdit": {'btType' : 'BTJEditInsert-2523', 
+                        'path' : { 'btType' : 'BTJPath-3073', 'startNode' : '', 'path' : [{ 'btType' : 'BTJPathKey-3221', 'key' : key }] }, 
+                        'value' : value }
+        }
+
+    headers = {'Accept': 'application/vnd.onshape.v1+json',
+            'Content-Type': 'application/json'}
+
+    fixed_url = fixed_url.replace('did', did)
+    fixed_url = fixed_url.replace('wid', wid)
+    fixed_url = fixed_url.replace('eid', eid)
+
+    response = client.api_client.request(method, url=base + fixed_url, query_params=params, headers=headers, body=payload)
+
+    parsed = json.loads(response.data)
+    # The command below prints the entire JSON response from Onshape
+    return parsed['errorDescription']
+
