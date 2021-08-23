@@ -680,5 +680,3 @@ def OnshapeAddJsonKey(key,value):
     parsed = json.loads(response.data)
     # The command below prints the entire JSON response from Onshape
     return parsed['errorDescription']
-
-def OnshapeClearJsonTree():
