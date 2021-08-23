@@ -7,3 +7,4 @@ client = Client(configuration={"base_url": base,
                                "access_key": access,
                                "secret_key": secret})
 print('client configured')
+return client
