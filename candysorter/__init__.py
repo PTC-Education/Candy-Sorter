@@ -7,18 +7,22 @@ import pandas as pd
 import smbus
 import math
 
-from adafruit_servokit import ServoKit
-kit = ServoKit(channels=16)
 import board
 import adafruit_tcs34725
 
+motordriver = 0
+
 try:
+    from adafruit_servokit import ServoKit
+    kit = ServoKit(channels=16)
     i2c = board.I2C()
     sensor = adafruit_tcs34725.TCS34725(i2c)
+    motordriver = 1
 except:
     from candysorter.PCA9685 import PCA9685
     pwm = PCA9685(0x40, debug=False)
     pwm.setPWMFreq(50)
+    motordriver = 2
 
 ## Set ThingWorx Parameters
 baseURL = "https://pp-2101111403aw.portal.ptc.io/Thingworx/Things/CandySorter/"
