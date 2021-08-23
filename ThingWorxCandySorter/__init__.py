@@ -48,7 +48,7 @@ try:
     sensor = adafruit_tcs34725.TCS34725(i2c)
     motordriver = 1
 except:
-    from candysorter.PCA9685 import PCA9685
+    from ThingWorxCandySorter.PCA9685 import PCA9685
     pwm = PCA9685(0x40, debug=False)
     pwm.setPWMFreq(50)
     motordriver = 2    
