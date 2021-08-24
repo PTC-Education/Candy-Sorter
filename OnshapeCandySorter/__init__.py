@@ -643,7 +643,37 @@ def UpdateJsonKey(key,value):
     return parsed['errorDescription']
 
 ## Append value onto array that is set to Json key named "data"
-def UpdateJsonDataArray(value):
+def ResetJsonDataArray():
+    fixed_url = '/api/appelements/d/did/w/wid/e/eid/content'
+
+    method = 'POST'
+
+    # Insertion: { 'btType' : 'BTJEditInsert-2523', 'path' : path, 'value' : newValue }
+    jsonTreeData = GetJsonTree()
+
+    params = {}
+    payload = {
+        "parentChangeId": jsonTreeData['changeId'],
+        "jsonTreeEdit": {"btType" : "BTJEditChange-2636", 
+                        "path" : { 'btType' : 'BTJPath-3073', 'startNode' : '', 'path' : [{ 'btType' : 'BTJPathKey-3221', 'key' : 'data' }] }, 
+                        'value' : [] }
+        }
+
+    headers = {'Accept': 'application/vnd.onshape.v1+json',
+            'Content-Type': 'application/json'}
+
+    fixed_url = fixed_url.replace('did', did)
+    fixed_url = fixed_url.replace('wid', wid)
+    fixed_url = fixed_url.replace('eid', eid)
+
+    response = client.api_client.request(method, url=base + fixed_url, query_params=params, headers=headers, body=payload)
+
+    parsed = json.loads(response.data)
+    # The command below prints the entire JSON response from Onshape
+    return parsed['errorDescription']
+
+## Append value onto array that is set to Json key named "data"
+def UpdateJsonDataArray(valueArray):
     fixed_url = '/api/appelements/d/did/w/wid/e/eid/content'
 
     method = 'POST'
@@ -651,7 +681,8 @@ def UpdateJsonDataArray(value):
     # Insertion: { 'btType' : 'BTJEditInsert-2523', 'path' : path, 'value' : newValue }
     jsonTreeData = GetJsonTree()
     dataArray = jsonTreeData['tree']['data']
-    dataArray.append(value)
+    for row in valueArray:
+        dataArray.append(row)
 
     params = {}
     payload = {
