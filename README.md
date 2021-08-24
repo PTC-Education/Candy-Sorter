@@ -96,28 +96,28 @@ sudo apt-get install python3-pandas
 </li>
 <li>Import the candysorter python library
   
-`import candysorter`
+`from ThingWorxCandySorter import *`
     </li>
 
 <li>Run the test scripts
   
 ```
-candysorter.feederServoTest()
-candysorter.rampServoTest()
-candysorter.sensorTest()
+feederServoTest()
+rampServoTest()
+sensorTest()
 ```
 and run the settings scripts if things are not working
 ```
-candysorter.setServoNumbers()
-candysorter.setColorPos()
-candysorter.setFeederPos()
+setServoNumbers()
+setColorPos()
+setFeederPos()
 ```
 
 
 <li>Once everything looks good, run the full motor test script. Motors will end at 90 degrees.
   
 ```
-candysorter.fullServoTest()
+fullServoTest()
 ```
 
     
@@ -161,7 +161,7 @@ candysorter.fullServoTest()
 ## Train Model
 <details><summary><b>Build data set</b></summary>
 
-* Now you are ready to train your model. From your repl you can now run `candysorter.mainTraining(5)`. The input parameter to the mainTraining function is the number of times each color input will be added to the data table.
+* Now you are ready to train your model. From your repl you can now run `mainTraining(5)`. The input parameter to the mainTraining function is the number of times each color input will be added to the data table.
 * The repl will ask you to input the color skittle each time. If there is no skittle, you can just click enter and "none" will be added to the 
 * Check the mashup of your data table to make sure data is being added.
 * Add as many rows as you think the model will need to learn (you can always add more and retrain)
@@ -170,7 +170,7 @@ candysorter.fullServoTest()
   
 <details><summary><b>Train the model</b></summary>
 
-1. Run `candysorter.trainModel()` from the repl. 
+1. Run `trainModel()` from the repl. 
 2. This script will first export the data from your data table into python, then gets rid of any unnecessary columns, then formats as an infotable and sends it to the TrainingThing on the Analytics Server. **Make sure you've set the "AnalyticsServerString" property in ThingWorx to match your analytics string**
 3. The script should prompt you to type in the data type and operational type of each of the fields. 
     1. For the Red, Green, and Blue fields, they should be `INTEGER` and `CONTINUOUS`.
@@ -182,7 +182,7 @@ candysorter.fullServoTest()
   
 <details><summary><b>Get Model Status</b></summary>
 
-1. From the repl, run `candysorter.getModelStatus()`. This service will ask ThingWorx for the model status every 20 seconds until it is complete.
+1. From the repl, run `getModelStatus()`. This service will ask ThingWorx for the model status every 20 seconds until it is complete.
 
 
 </details>
@@ -193,7 +193,7 @@ Once the model has finished training, you are ready to automate the candy sorter
   
   
 ```
-candysorter.mainAutoSort()
+mainAutoSort()
 ```
   
 </details>
