@@ -517,6 +517,7 @@ def ConfigClient():
     global client
     global base
     from onshape_client.client import Client
+    from onshape_client.onshape_url import OnshapeElement
     import json
     base = 'https://cad.onshape.com' # change this if you're using a document in an enterprise (i.e. "https://ptc.onshape.com")
     access = input('What is your access key?')

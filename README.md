@@ -1,17 +1,31 @@
-# Candy-Sorter
+<div class="container"><h2>Candy Sorter</h2>
+The goal of this project is to introduce students to the process of designing, building, and analyzing a closed loop manufacturing process. This is a living project and will be updated as new features are added.
+</div>
+
+<div class="container">
+            <p style="text-align:center"><img src="./Resources/OnshapeCandySorterGif.gif" alt="CandySorterOnshapeAnimation" width="30%" margin="0px 0px 0px 0px"/></p>
+</div>
+
+<!-- <div class="container">
+    <div class="columns is-vcentered is-centered is-multiline ">
+        <div class="column width:40%">
+            <p style="text-align:center">The candy sorting machine presented in this project is a low-cost, open-sourced design to illustrate a number of ways that the digital transformation technology can add value to a process. You will be shown how the design can be configured to sort a custom candy of your choise in Onshape, then use the latest custom version to assemble the 3D printed parts. Then the machine can be connected to the cloud through python scripts and REST API, storing the data in Onshape and training the machine learning model in ThingWorx. To close the loop, you can add a vision system to the raspberry pi to provide quality control and control the rate of sorting with any online database.</p>
+        </div>
+        <div class="column is-one-half is-vcentered is-centered">
+            <p style="text-align:center"><img src="./Resources/Industry3to4candysorter.gif" alt="CandySorterOnshapeAnimation" width="100%" align="middle"/></p>
+        </div>
+    </div>
+</div> -->
 
 <table>
-  <tr><th>
-      <p style="text-align:center"><img src="./Resources/CandySorterTraining.gif" alt="CandySorterOnshapeAnimation" width="100%" align="middle"/></p>
+  <tr><th width="50%">
+      <p style="text-align:left">The candy sorting machine presented in this project is a low-cost, open-sourced design to illustrate a number of ways that the digital transformation technology can add value to a process. You will be shown how the design can be configured to sort a custom candy of your choise in Onshape, then use the latest custom version to assemble the 3D printed parts. Then the machine can be connected to the cloud through python scripts and REST API, storing the data in Onshape and training the machine learning model in ThingWorx. To close the loop, you can add a vision system to the raspberry pi to provide quality control and control the rate of sorting with any online database.</p>
   </th>
   <th>
-      <p style="text-align:center"><img src="./Resources/CandySorterOnshapeAnimation.gif" alt="CandySorterOnshapeAnimation" width="70%" align="middle"/></p>
+      <p style="text-align:center"><img src="./Resources/Industry3to4candysorter.gif" alt="CandySorterOnshapeAnimation" width="80%" align="middle"/></p>
     </th></tr>
 </table>
 
-
-## What is this?
-The goal of the candy sorter activity is to introduce students to the process of designing, building, and analyzing a closed loop manufacturing process. 
 
 #### This tutorial shows you how to put together the candy sorting machine found in [this Onshape document](https://cad.onshape.com/documents/5ba1eb5e5f8ddb831d755d06/w/2c1ffb51df0e9d946adb27b3/e/ee0628979c06ea0d795b6ab4)
 The original version of the candy sorting machine was made to sort skittles, but the model can be configured to fit any size candy of different color.
