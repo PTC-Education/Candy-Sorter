@@ -3,7 +3,7 @@ The goal of this project is to introduce students to the process of designing, b
 </div>
 
 <div class="container">
-            <p style="text-align:center"><img src="./Resources/OnshapeCandySorterGif.gif" alt="CandySorterOnshapeAnimation" width="30%" margin="0px 0px 0px 0px"/></p>
+            <p style="text-align:center"><img src="./Resources/OnshapeCandySorterGif.gif" alt="CandySorterOnshapeAnimation" width="50%" margin="0px 0px 0px 0px"/></p>
 </div>
 
 <!-- <div class="container">
@@ -57,7 +57,20 @@ The original version of the candy sorting machine was made to sort skittles, but
 </details>
   
   
-<h2> Build Candy Sorting Machine (using AR work instructions)</h2>
+<h2> Build Candy Sorting Machine</h2>
+<details><summary><b>3D Printing Parts</b></summary>
+<table>
+  <tr><th width="50%">
+      <p style="text-align:left">All parts have been designed to be 3D printed without supports. All parts should be printed in the orientation of the design besides the "feeder disk" and "ramp" which should be oriented as shown to the right.</p>
+  </th>
+  <th>
+      <p style="text-align:center"><img src="./Resources/3DprinterOrientation.jpg" alt="CandySorterOnshapeAnimation" width="70%" align="middle"/></p>
+    </th></tr>
+</table>
+
+
+</details>
+
 <details><summary><b>Building Steps</b></summary>
 <br>
   <ol>
